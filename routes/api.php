@@ -25,5 +25,5 @@ Route::get('/categories', [ProductCategoryController::class, 'all']);
 
 // auth
 
-Route::get('/register', [\App\Http\Controllers\API\UserController::class, 'register']);
 Route::post('/register', [\App\Http\Controllers\API\UserController::class, 'register']);
+Route::post('/login', [\App\Http\Controllers\API\UserController::class, 'login']);
