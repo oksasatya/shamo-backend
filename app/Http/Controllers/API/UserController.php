@@ -83,4 +83,38 @@ class UserController extends Controller
             ], 'Error logging in user', 500);
         }
     }
+
+
+    public function fetch(Request $request)
+    {
+        // return ResponseFormatter::success($request->user(), 'User fetched successfully');
+        try {
+            $user = User::where('id', $request->user()->id)->first();
+            return ResponseFormatter::success($user, 'User berhasil diambil');
+        } catch (Exception $e) {
+            return ResponseFormatter::error([
+                'message' => $e->getMessage(),
+            ], 'Error fetching user', 500);
+        }
+    }
+
+
+    public function editProfile(Request $request)
+    {
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255',
+            'phone' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+        ]);
+
+
+        $data = $request->all();
+        $user = Auth::user();
+
+        $user->update($data);
+
+        return ResponseFormatter::success($user, 'Profil berhasil diubah');
+    }
 }
