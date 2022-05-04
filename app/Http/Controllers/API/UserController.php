@@ -117,4 +117,10 @@ class UserController extends Controller
 
         return ResponseFormatter::success($user, 'Profil berhasil diubah');
     }
+
+    public function logout(Request $request)
+    {
+        $request->user()->tokens()->delete();
+        return ResponseFormatter::success([], 'Logout successful');
+    }
 }

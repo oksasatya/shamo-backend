@@ -33,4 +33,7 @@ Route::post('/login', [\App\Http\Controllers\API\UserController::class, 'login']
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('user', [UserController::class, 'fetch']);
     Route::post('user', [UserController::class, 'editProfile']);
+    Route::post('logout', [UserController::class, 'logout']);
+
+    Route::get('transactions', [\App\Http\Controllers\API\TransactionController::class, 'all']);
 });
